@@ -1,0 +1,56 @@
+{
+  "name": "@sijanbhattarai/mdx-editor-editor",
+  "version": "1.0.32",
+  "description": "Main MDX Editor component",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite build --watch",
+    "type-check": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "@mdxeditor/editor": "^3.40.1",
+    "@teamimpact/veda-ui": "*",
+    "@devseed-ui/theme-provider": "*",
+    "focus-trap-react": "*",
+    "next": "^13.0.0 || ^14.0.0 || ^15.0.0"
+  },
+  "dependencies": {
+    "@sijanbhattarai/mdx-editor-core": "^0.1.6",
+    "@sijanbhattarai/mdx-editor-ui": "^0.1.6",
+    "@sijanbhattarai/mdx-editor-utils": "^1.0.6",
+    "@sijanbhattarai/mdx-editor-plugins": "^0.1.6",
+    "@lexical/react": "^0.33.1",
+    "lexical": "^0.33.1",
+    "unified": "^11.0.0",
+    "remark-parse": "^11.0.0",
+    "remark-stringify": "^11.0.0",
+    "mdast-util-from-markdown": "^2.0.0",
+    "mdast-util-mdx-jsx": "^3.0.0",
+    "micromark-extension-mdx-jsx": "^3.0.0",
+    "unist-util-visit": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "typescript": "^5.0.0",
+    "vite": "^5.0.0",
+    "@vitejs/plugin-react": "^4.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NASA-IMPACT/mdx-editor-components.git"
+  },
+  "keywords": [
+    "mdx",
+    "editor",
+    "react"
+  ],
+  "author": "NASA IMPACT",
+  "license": "MIT"
+}

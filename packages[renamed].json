@@ -1,0 +1,33 @@
+{
+  "name": "@sijanbhattarai/mdx-editor-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/mdx-editor-core"
+    "packages/mdx-editor-datasets", 
+    "packages/mdx-editor-editor",
+    "packages/mdx-editor-maps",
+    "packages/mdx-editor-plugins",
+    "packages/mdx-editor-preview",
+    "packages/mdx-editor-ui",
+    "packages/mdx-editor-utils"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "clean": "npm run clean --workspaces --if-present",
+    "publish-all": "npm run build && npm publish --workspaces --access public",
+    "list-workspaces": "npm ls --workspaces"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.0.0",
+    "vite-plugin-dts": "^3.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "typescript": "^5.0.0",
+    "vite": "^5.0.0"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}

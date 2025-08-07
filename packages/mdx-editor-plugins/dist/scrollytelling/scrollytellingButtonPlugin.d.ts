@@ -1,0 +1,3 @@
+import { LexicalCommand } from 'lexical';
+export declare const INSERT_SCROLLYTELLING_NODE: LexicalCommand<void>;
+export declare const scrollytellingButtonPlugin: (params?: unknown) => import("@mdxeditor/editor").RealmPlugin;

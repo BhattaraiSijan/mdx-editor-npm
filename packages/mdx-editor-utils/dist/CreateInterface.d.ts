@@ -1,0 +1,24 @@
+import { default as React } from 'react';
+interface FieldProps {
+    fieldName: string;
+    value: string;
+    hint?: string;
+    onChange: (value: string) => void;
+    isRequired?: boolean;
+    isDate?: boolean;
+    numeric?: boolean;
+    onBlur?: (value: string) => void;
+    onFocus?: (value: string) => void;
+    type?: string;
+    componentProps: any;
+    propName: string;
+    customClass?: string;
+    placeHolder?: string;
+    draftInputs?: any;
+    inputErrors?: any;
+    setDraftInputs?: (value: any) => void;
+    setInputErrors?: (value: any) => void;
+    options?: string[];
+}
+export declare const InputField: React.FC<FieldProps>;
+export {};
