@@ -72,6 +72,4 @@ export function ClientMapBlock(props: MapPreviewProps) {
     </DevseedUIThemeProvider>
   );
 }
-
-// Make sure ClientMapBlock is the default export for dynamic imports to work correctly
 export default ClientMapBlock;

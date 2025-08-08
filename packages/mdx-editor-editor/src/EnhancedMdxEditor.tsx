@@ -1,5 +1,4 @@
-// @ts-nocheck
-// app/editor/page.tsx with source view tab
+
 'use client';
 
 import React, {
@@ -37,7 +36,6 @@ class ErrorBoundary extends React.Component {
     return this.props.children;
   }
 }
-// Use a stable key to preserve the editor state
 const EDITOR_KEY = 'stable-mdx-editor-instance';
 
 interface EditorStyle {

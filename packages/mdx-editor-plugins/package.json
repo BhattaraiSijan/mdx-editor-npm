@@ -1,6 +1,6 @@
 {
   "name": "@sijanbhattarai/mdx-editor-plugins",
-  "version": "0.1.32",
+  "version": "0.1.35",
   "description": "Plugins for MDXEditor",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

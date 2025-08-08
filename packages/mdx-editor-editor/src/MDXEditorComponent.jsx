@@ -34,7 +34,6 @@ import { MapEditorWrapper } from '@sijanbhattarai/mdx-editor-maps';
 import { IframeEditor, InsertIframeButton } from '@sijanbhattarai/mdx-editor-plugins';
 import { allAvailableDatasets } from '@sijanbhattarai/mdx-editor-datasets';
 
-// import MapBlockPreviewInEditor from './components/MapBlockPreviewEditor'; // File doesn't exist
 const vedaComponentDescriptors = [
   {
     name: 'MapBlock',

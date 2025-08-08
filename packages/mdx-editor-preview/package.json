@@ -1,6 +1,6 @@
 {
   "name": "@sijanbhattarai/mdx-editor-preview",
-  "version": "1.0.32",
+  "version": "1.0.35",
   "description": "MDX Preview components",
   "type": "module",
   "main": "dist/index.js",

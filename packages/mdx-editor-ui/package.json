@@ -1,6 +1,6 @@
 {
   "name": "@sijanbhattarai/mdx-editor-ui",
-  "version": "0.1.32",
+  "version": "0.1.35",
   "description": "UI components for MDXEditor",
   "type": "module",
   "main": "dist/index.js",

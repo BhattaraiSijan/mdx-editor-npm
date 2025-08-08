@@ -1,6 +1,6 @@
 {
   "name": "@sijanbhattarai/mdx-editor-core",
-  "version": "0.1.33",
+  "version": "0.1.36",
   "description": "Core components for MDXEditor",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

@@ -108,51 +108,24 @@ export function MDXEditorEnhanced({
   const [isEditorReady, setIsEditorReady] = useState(false);
   const [currentMarkdown, setCurrentMarkdown] = useState(markdown);
   
-  // Track if this is the initial render
   const isInitialMount = useRef(true);
-  
-  // Create component descriptors with allAvailableDatasets
-  // Use a ref to ensure the descriptors always have access to the latest datasets
+
   const datasetsRef = React.useRef(allAvailableDatasets);
   datasetsRef.current = allAvailableDatasets;
   
   const componentDescriptors = React.useMemo(() => {
     // Pass a getter function instead of the datasets directly
     return createJsxComponentDescriptors(() => datasetsRef.current);
-  }, []); // Only create once, but the getter will always return current datasets
+  }, []); 
   
-  // Use markdown directly without manipulation
   const markdownForEditor = markdown || '';
   
-  // Log the actual markdown content being passed to editor
-  console.log('MDXEditor: markdownForEditor preview:', markdownForEditor?.slice(0, 500) + '...');
-  console.log('MDXEditor: Contains <Map>?', markdownForEditor?.includes('<Map'));
-  console.log('MDXEditor: Map pattern matches:', markdownForEditor?.match(/<Map[^>]*>/g));
-  
-  // Debug logging
-  useEffect(() => {
-    console.log('MDXEditorEnhanced mount/update:');
-    console.log('- Markdown length:', markdownForEditor?.length);
-    console.log('- Contains Map component?', markdownForEditor?.includes('<Map'));
-    console.log('- Component descriptors:', componentDescriptors.map(d => d.name));
-    console.log('- Datasets loaded:', allAvailableDatasets?.length);
-    console.log('- Editor ready?', isEditorReady);
-    
-    // Extract and log Map components in markdown
-    if (markdownForEditor?.includes('<Map')) {
-      const mapMatches = markdownForEditor.match(/<Map[^>]*>/g);
-      console.log('- Found Map components:', mapMatches);
-    }
-  }, [markdownForEditor, componentDescriptors, allAvailableDatasets, isEditorReady]);
-  
-  // Log when component descriptors are ready
   useEffect(() => {
     if (componentDescriptors.length > 0) {
       console.log('Component descriptors ready:', componentDescriptors.length);
     }
   }, [componentDescriptors]);
   
-  // Check if editor is ready after mount
   useEffect(() => {
     if (editorRef.current) {
       setIsEditorReady(true);
@@ -161,7 +134,6 @@ export function MDXEditorEnhanced({
   }, []); // Only run once
   
   useEffect(() => {
-    // Get textarea from props or context
     const textarea = document.querySelector('.mdx-editor-field');
     if (textarea && markdown) {
       textarea.value = markdown;
@@ -181,10 +153,8 @@ export function MDXEditorEnhanced({
     }
   }, [currentMarkdown]);
   
-  // Add an effect to handle imports
   useEffect(() => {
     if (editorRef.current && isEditorReady) {
-      // Use the addImportVisitor$ to add import handling
       console.log('Editor is ready, checking for JSX components');
     }
   }, [isEditorReady]);
@@ -198,17 +168,12 @@ export function MDXEditorEnhanced({
           extensions: [mdxJsx()],
           mdastExtensions: [mdxJsxFromMarkdown()],
         });
-        //mdxJsxFromMarkdown converts all contents of TwoCOlumn to 'code' blocks
-        //Below re parses it and converts back to accepted MDX values.
         visit(tree, 'mdxJsxFlowElement', (node) => {
           if (
             ['RightColumn', 'LeftColumn'].includes(node.name) &&
             node.children.length > 0
           ) {
-            // The round-trip of getMarkdown() -> fromMarkdown() can cause the rich content of the columns
-            // to be stringified into a single text/code node. We need to re-parse that content.
             const innerMarkdown = (node.children[0] as any)?.value;
-            // Only re-parse if innerMarkdown is a string. It can be undefined if the child is not a text/code node.
             if (typeof innerMarkdown === 'string') {
               node.children = fromMarkdown(innerMarkdown, {
                 extensions: [mdxJsx()],
@@ -228,8 +193,6 @@ export function MDXEditorEnhanced({
             console.log('Map node attributes:', node.attributes);
           }
         });
-        console.log('analyzeMdast: Found', mapNodes.length, 'Map mdxJsxFlowElement nodes');
-        console.log('All JSX nodes found:', allJsxNodes);
         
         setMdast(tree);
         
@@ -240,14 +203,9 @@ export function MDXEditorEnhanced({
       alert('Error analyzing MDAST: ' + error.message);
     }
   };
-  
-  // Remove the sync effect - let the editor handle its own state
-  
-  // Remove key-based remounting - let the editor handle its own state
-  // This prevents Lexical reconciliation errors
+
   const editorKey = 'stable-editor';
   
-  // Don't render the editor until we have component descriptors ready
   if (componentDescriptors.length === 0) {
     console.log('MDXEditor: Waiting for component descriptors...');
     return (
@@ -269,7 +227,6 @@ export function MDXEditorEnhanced({
       setCurrentMarkdown(content);
       
       console.log("this is the one", content)
-      // Sync with textarea immediately
       const textarea = document.querySelector('.mdx-editor-field');
       if (textarea) {
         textarea.value = content;
@@ -283,19 +240,10 @@ export function MDXEditorEnhanced({
     }}
     contentEditableClassName='prose prose-lg max-w-none min-h-[500px] outline-none px-4 py-2'
     plugins={[
-      // JSX Plugin MUST be first to properly handle components on initial load
       (() => {
-        console.log('Initializing jsxPlugin with descriptors:', componentDescriptors.map(d => ({ name: d.name, kind: d.kind })));
-        // Try passing the descriptors directly without memoization
         const descriptors = createJsxComponentDescriptors(() => datasetsRef.current);
-        console.log('Fresh descriptors for jsxPlugin:', descriptors.length);
         
-        // Log descriptor names to ensure Map is included
-        console.log('Descriptor names:', descriptors.map(d => d.name));
-        
-        // Find the Map descriptor
         const mapDescriptor = descriptors.find(d => d.name === 'Map');
-        console.log('Map descriptor found:', !!mapDescriptor);
         
         return jsxPlugin({
           jsxComponentDescriptors: descriptors,
@@ -305,8 +253,6 @@ export function MDXEditorEnhanced({
         });
       })(),
       (() => {
-        console.log('MDXEditor: Initializing plugins with', componentDescriptors.length, 'component descriptors');
-        console.log('MDXComponents available:', Object.keys(MDXComponents));
         return realmPlugin({
           allowedImports: {
             './components': MDXComponents,
@@ -329,7 +275,6 @@ export function MDXEditorEnhanced({
       }),
       diffSourcePlugin({
         viewMode: 'rich-text',
-        // Don't set diffMarkdown - let it sync automatically with the editor state
       }),
       toolbarPlugin({
         toolbarContents: () => (

@@ -1,6 +1,6 @@
 {
   "name": "@sijanbhattarai/mdx-editor-utils",
-  "version": "1.0.32",
+  "version": "1.0.35",
   "description": "Utility functions for MDX Editor",
   "type": "module",
   "main": "dist/index.js",

@@ -34,9 +34,6 @@ const createPlaceholderNode = (): LexicalNode => {
   } as unknown as LexicalNode;
 };
 
-// =================================================================
-// Your original MapEditorWithPreview component - UNCHANGED
-// =================================================================
 const MapEditorWithPreview: React.FC<any> = (props) => {
   const contextValue = useMapContext();
   const [isEditing, setIsEditing] = useState(true);
@@ -288,15 +285,10 @@ const MapEditorWithPreview: React.FC<any> = (props) => {
   );
 };
 
-// =================================================================
-// THE CORRECTED WRAPPER THAT CREATES THE SANDBOX
-// =================================================================
 const MapEditorWrapper: React.FC<EditorMapProps> = (props) => {
-  // THE FIX: Get the parent editor directly from PROPS.
   const parentEditor = props.parentEditor;
-
   const initialConfig = {
-    namespace: `MapEditor-${props.mdastNode.position.start.offset}`,
+    namespace: `MapEditor-${props.mdastNode.name}`,
     editable: false,
     parentEditor: parentEditor,
     nodes: [

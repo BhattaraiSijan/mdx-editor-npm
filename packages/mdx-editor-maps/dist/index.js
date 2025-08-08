@@ -9755,7 +9755,7 @@ const createPlaceholderNode = () => ({
   ] }) });
 }, MapEditorWrapper = (T) => {
   const E = T.parentEditor, w = {
-    namespace: `MapEditor-${T.mdastNode.position.start.offset}`,
+    namespace: `MapEditor-${T.mdastNode.name}`,
     editable: !1,
     parentEditor: E,
     nodes: [

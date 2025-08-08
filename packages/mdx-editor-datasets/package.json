@@ -1,6 +1,6 @@
 {
   "name": "@sijanbhattarai/mdx-editor-datasets",
-  "version": "1.0.32",
+  "version": "1.0.35",
   "description": "Dataset configurations for MDX Editor",
   "type": "module",
   "main": "dist/index.js",

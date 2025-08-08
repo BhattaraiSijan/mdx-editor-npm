@@ -14,7 +14,6 @@ import { allAvailableDatasets } from '@sijanbhattarai/mdx-editor-datasets';
 import { availableCsvs } from '@sijanbhattarai/mdx-editor-datasets';
 
 export const createJsxComponentDescriptors = (datasetsGetter: (() => any[]) | any[] = []): JsxComponentDescriptor[] => {
-  // Support both direct datasets array and getter function
   const getDatasets = () => {
     if (typeof datasetsGetter === 'function') {
       return datasetsGetter() || [];
@@ -40,10 +39,8 @@ export const createJsxComponentDescriptors = (datasetsGetter: (() => any[]) | an
     Editor: (props) => {
       console.log('TestComponent Editor called with props:', props);
       
-      // Import the actual TestComponent from components
       const TestComponent = require('@sijanbhattarai/mdx-editor-core').TestComponent;
       
-      // Extract props from mdastNode
       const mdastNode = props.mdastNode;
       const getAttributeValue = (attrName, defaultValue) => {
         if (!mdastNode?.attributes) return defaultValue;
@@ -76,7 +73,6 @@ export const createJsxComponentDescriptors = (datasetsGetter: (() => any[]) | an
       return <VedaMap {...props} />;
     },
   },
-  // Map component - simplified like TestComponent
   {
     name: 'Map',
     kind: 'flow',
@@ -97,7 +93,6 @@ export const createJsxComponentDescriptors = (datasetsGetter: (() => any[]) | an
       console.log('Map Editor called! Props:', props);
       console.log('Map Editor mdastNode:', props?.mdastNode);
       
-      // In MDXEditor, the mdastNode contains the attributes
       const mdastNode = props.mdastNode;
       
       if (!mdastNode) {
@@ -107,7 +102,6 @@ export const createJsxComponentDescriptors = (datasetsGetter: (() => any[]) | an
         </div>;
       }
       
-      // Extract props from mdastNode attributes like the working implementation
       const getAttributeValue = (attrName, defaultValue = '') => {
         if (!mdastNode.attributes || !Array.isArray(mdastNode.attributes)) {
           return defaultValue;
@@ -121,7 +115,6 @@ export const createJsxComponentDescriptors = (datasetsGetter: (() => any[]) | an
       
       console.log('Extracted from mdastNode - datasetId:', datasetId, 'layerId:', layerId);
       
-      // Pass mdastNode to MapEditorWrapper like the working implementation
       if (!MapEditorWrapper) {
         return <div>Map Editor not available</div>;
       }
@@ -155,7 +148,6 @@ export const createJsxComponentDescriptors = (datasetsGetter: (() => any[]) | an
       console.log('Map Editor called! Props:', props);
       console.log('Map Editor mdastNode:', props?.mdastNode);
       
-      // In MDXEditor, the mdastNode contains the attributes
       const mdastNode = props.mdastNode;
       
       if (!mdastNode) {
@@ -165,7 +157,6 @@ export const createJsxComponentDescriptors = (datasetsGetter: (() => any[]) | an
         </div>;
       }
       
-      // Extract props from mdastNode attributes like the working implementation
       const getAttributeValue = (attrName, defaultValue = '') => {
         if (!mdastNode.attributes || !Array.isArray(mdastNode.attributes)) {
           return defaultValue;
@@ -179,7 +170,6 @@ export const createJsxComponentDescriptors = (datasetsGetter: (() => any[]) | an
       
       console.log('Extracted from mdastNode - datasetId:', datasetId, 'layerId:', layerId);
       
-      // Pass mdastNode to MapEditorWrapper like the working implementation
       if (!MapEditorWrapper) {
         return <div>Map Editor not available</div>;
       }
@@ -495,7 +485,6 @@ export const createJsxComponentDescriptors = (datasetsGetter: (() => any[]) | an
 ];
 };
 
-// Export a default set for backward compatibility
 export const jsxComponentDescriptors = createJsxComponentDescriptors(allAvailableDatasets);
 
 export const CalloutDirectiveDescriptor: DirectiveDescriptor = {
@@ -503,9 +492,7 @@ export const CalloutDirectiveDescriptor: DirectiveDescriptor = {
   testNode(node) {
     return node.name === 'callout';
   },
-  // set some attribute names to have the editor display a property editor popup.
   attributes: [],
-  // used by the generic editor to determine whether or not to render a nested editor.
   hasChildren: true,
   Editor: GenericDirectiveEditor,
 };

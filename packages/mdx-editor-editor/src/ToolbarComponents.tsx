@@ -5,7 +5,6 @@ import { Icon } from '@trussworks/react-uswds';
 import { NestedLexicalEditor, useMdastNodeUpdater } from '@mdxeditor/editor';
 
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-// import TwoColumnIcon from './assets/TwoColumnIcon';
 import {
   Button,
   usePublisher,

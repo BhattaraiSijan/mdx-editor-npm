@@ -1,6 +1,6 @@
 {
   "name": "@sijanbhattarai/mdx-editor-editor",
-  "version": "1.0.32",
+  "version": "1.0.35",
   "description": "Main MDX Editor component",
   "type": "module",
   "main": "dist/index.js",

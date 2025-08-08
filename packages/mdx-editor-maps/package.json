@@ -1,6 +1,6 @@
 {
   "name": "@sijanbhattarai/mdx-editor-maps",
-  "version": "1.0.32",
+  "version": "1.0.35",
   "description": "Map components for MDX Editor",
   "type": "module",
   "main": "dist/index.js",
